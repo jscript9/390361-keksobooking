@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Архипов](https://up.htmlacademy.ru/javascript/9/user/390361).
-* Наставник: `Неизвестно`.
+* Наставник: `Игорь Антонов`.
 
 ---
 
