@@ -1,241 +1,161 @@
-var houses = [
-  {
-    'author': {
-      'avatar': 'img/avatars/user01.png',
-    },
+'use strict';
 
-    'offer': {
-      'title': 'Большая уютная квартира',
-      'address': 'houses[0].location.x, houses[0].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'flat',
-      'rooms': randomInteger(1, 5),
-      'guests': 10,
-      'checkin': '12:00',
-      'checkout': '13:00',
-      'features': ['wifi', 'dishwasher', 'parking', 'washer', 'elevator'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    },
-
-   {
-    'author': {
-      'avatar': 'img/avatars/user02.png',
-    },
-
-    'offer': {
-      'title': 'Маленькая неуютная квартира',
-      'address': 'houses[1].location.x, houses[1].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'flat',
-      'rooms': randomInteger(1, 5),
-      'guests': 8,
-      'checkin': '13:00',
-      'checkout': '14:00',
-      'features': ['wifi', 'parking', 'washer', 'elevator'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
-
-  {
-    'author': {
-      'avatar': 'img/avatars/user03.png',
-    },
-
-    'offer': {
-      'title': 'Огромный прекрасный дворец',
-      'address': 'houses[2].location.x, houses[2].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'bungalo',
-      'rooms': randomInteger(1, 5),
-      'guests': 11,
-      'checkin': '13:00',
-      'checkout': '14:00',
-      'features': ['wifi', 'parking', 'washer', 'elevator'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
-
-  {
-    'author': {
-      'avatar': 'img/avatars/user04.png',
-    },
-
-    'offer': {
-      'title': 'Маленький ужасный дворец',
-      'address': 'houses[3].location.x, houses[3].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'bungalo',
-      'rooms': randomInteger(1, 5),
-      'guests': 6,
-      'checkin': '14:00',
-      'checkout': '15:00',
-      'features': ['wifi', 'parking'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
-
-  {
-    'author': {
-      'avatar': 'img/avatars/user05.png',
-    },
-
-    'offer': {
-      'title': 'Красивый гостевой домик',
-      'address': 'houses[4].location.x, houses[4].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'house',
-      'rooms': randomInteger(1, 5),
-      'guests': 5,
-      'checkin': '14:00',
-      'checkout': '15:00',
-      'features': ['wifi', 'parking', 'washer'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
-
-  {
-    'author': {
-      'avatar': 'img/avatars/user06.png',
-    },
-
-    'offer': {
-      'title': 'Некрасивый негостеприимный домик',
-      'address': 'houses[5].location.x, houses[5].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'house',
-      'rooms': randomInteger(1, 5),
-      'guests': 7,
-      'checkin': '14:00',
-      'checkout': '15:00',
-      'features': ['parking', 'washer'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
-
-  {
-    'author': {
-      'avatar': 'img/avatars/user07.png',
-    },
-
-    'offer': {
-      'title': 'Уютное бунгало далеко от моря',
-      'address': 'houses[6].location.x, houses[6].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'bungalo',
-      'rooms': randomInteger(1, 5),
-      'guests': 4,
-      'checkin': '13:00',
-      'checkout': '15:00',
-      'features': ['washer'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
-
-  {
-    'author': {
-      'avatar': 'img/avatars/user08.png',
-    },
-
-    'offer': {
-      'title': 'Неуютное бунгало по колено в воде',
-      'address': 'houses[7].location.x, houses[7].location.y',
-      'price': randomInteger(1000, 1000000),
-      'type': 'bungalo',
-      'rooms': randomInteger(1, 5),
-      'guests': 5,
-      'checkin': '13:00',
-      'checkout': '14:00',
-      'features': ['washer'],
-      'description': '',
-      'photos': ''
-    },
-
-    'location': {
-      'x': randomInteger(300, 900),
-      'y': randomInteger(100, 500)
-    }
-  },
+var numberOfAvatars = [1, 2, 3, 4, 5, 6, 7, 8];
+var titleName = [
+  'Большая уютная квартира',
+  'Маленькая неуютная квартира',
+  'Огромный прекрасный дворец',
+  'Маленький ужасный дворец',
+  'Красивый гостевой домик',
+  'Некрасивый негостеприимный домик',
+  'Уютное бунгало далеко от моря',
+  'Неуютное бунгало по колено в воде'
 ];
+var typeName = [
+  'flat', 'house', 'bungalo'
+];
+var checkinTime = ['12:00', '13:00', '14:00'];
+var checkoutTime = ['12:00', '13:00', '14:00'];
+var featuresName = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
+function getUserAvatar() {
+  return 'img/avatars/user0' + numberOfAvatars[getRandomInt(0, 7)];
+}
+
+function getRandomTitle() {
+  return titleName[getRandomInt(0, 7)];
+}
+
+function getObjectPrice() {
+  return randomInteger(1000, 1000000);
+}
+
+function getObjectType() {
+  return typeName[randomInteger(0, 2)];
+}
+
+function getLocationX() {
+  return randomInteger(300, 900);
+}
+
+function getLocationY() {
+  return randomInteger(100, 500);
+}
+
+function getNumberOfRomms() {
+  return randomInteger(1, 5);
+}
+
+function getNumberOfGuests() {
+  return randomInteger(1, 10);
+}
+
+function getCheckinTime() {
+  return checkinTime[randomInteger(0, 2)];
+}
+
+function getCheckoutTime() {
+  return checkoutTime[randomInteger(0, 2)];
+}
+
+function getFeatures() {
+  return featuresRandom(featuresName);
+}
+
+function getDescription() {
+  return '';
+}
+
+function getPhotos() {
+  return [];
+}
+
+function makeOfferObject() {
+  var result = {};
+  result.author.avatar = getUserAvatar();
+  result.offer.title = getRandomTitle();
+  result.offer.addres = getLocationX() + ', ' + getLocationY();
+  result.offer.price = getObjectPrice();
+  result.offer.type = getObjectType();
+  result.offer.rooms = getNumberOfRomms();
+  result.offer.guests = getNumberOfGuests();
+  result.offer.checkin = getCheckinTime();
+  result.offer.checkout = getCheckoutTime();
+  result.offer.features = getFeatures();
+  result.offer.description = getDescription();
+  result.offer.photos = getPhotos();
+  result.location.x = getLocationX();
+  result.location.y = getLocationY();
+}
+
+function makeAllOfferObjects(count) {
+ var result = [];
+ for (var i = 0; i < count; i++) {
+    result[i] = makeOfferObject();
+}
+var houses = makeAllOfferObjects(8);
+
+function getRandomInt(min, max) {
+  var randNumOld = -1;
+  var randNum = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  if (randNum === randNumOld) {
+    return getRandomInt(min, max);
+  }
+  randNumOld = randNum;
+  return randNum;
+};
+
+function featuresRandom(featuresList) {
+  featuresName.sort(compareRandom);
+  featuresName.length = randomInteger(1, 6);
+  var result = [];
+  for (var i = 0; i < featuresName.length; i++) {
+    result.push(featuresName[i]);
+  }
+  return result;
+}
+
+function randomInteger(min, max) {
+  var rand = min + Math.random() * (max + 1 - min);
+  rand = Math.floor(rand);
+  return rand;
+};
+
+function compareRandom(a, b) {
+  return Math.random() - 0.5;
+}
 
 var dialogPanel = document.querySelector('.dialog__panel');
 var dialogImage = document.querySelector('.dialog__title')('img');
 var lodgeTemplate = document.querySelector('#lodge-template');
 var pinMap = document.querySelector('.tokyo__pin-map');
 var newFragment = createDocumentFragment();
+var typeOfHouse = {
+  'flat': 'Квартира',
+  'house': 'Дом',
+  'bungalo': 'Бунгало'
+};
 
 for (var i = 0; i < houses.length; i++) {
-    var pin = '<div class="pin" style="left: ' + houses[i].location.x + 'px; ' + 'top: ' + houses[i].location.y + 'px><img src=' +'"'
-    +houses[i].author.avatar + '"' + 'class="rounded" width="40" height="40"></div>';
+  var pin = '<div class="pin" style="left: ' + houses[i].location.x + 'px; ' + 'top: ' + houses[i].location.y + 'px><img src=' + '"'
+    + houses[i].author.avatar + '"' + 'class="rounded" width="40" height="40"></div>';
     newFragment.appendChild(pin);
 }
 pinMap.appendChild(newFragment);
 
-var renderHouse = function(house) {
-    var houseElement = lodgeTemplate.cloneNode(true);
-    houseElement.querySelector('lodge-template').textContent = house.offer.title;
-    houseElement.querySelector('lodge__address').textContent = house.offer.address;
-    if (house.offer.type === 'flat'){
-        houseElement.querySelector('lodge__address').textContent = 'Квартира';
-    } else if (house.offer.type === 'bungalo'){
-        houseElement.querySelector('lodge__address').textContent = 'Бунгало';
-    } else{
-        houseElement.querySelector('lodge__address').textContent = 'Дом';
-    }
-    houseElement.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + house.offer.guest + ' гостей в ' + house.offer.rooms + ' комнатах';
-    houseElement.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + house.offer.checkin + ', ' + 'выезд до ' + house.offer.checkout;
-    for (var i = 0; i < house.offer.features.length; i++){
-     var offerFeature = houseElement.querySelector('.lodge__features').createElement('span');
-     offerFeature.className = 'feature__image feature__image--' + house.offer.feature[i];
-    }
-    houseElement.querySelector('.lodge__description').textContent = house.offer.description;
-}
+function renderHouse(house) {
+  var houseElement = lodgeTemplate.cloneNode(true);
+  houseElement.querySelector('lodge-template').textContent = house.offer.title;
+  houseElement.querySelector('lodge__address').textContent = house.offer.address;
+  houseElement.querySelector('lodge__address').textContent = typeOfHouse[house.offer.type];
+  houseElement.querySelector('.lodge__rooms-and-guests').textContent = 'Для ' + house.offer.guest + ' гостей в ' + house.offer.rooms + ' комнатах';
+  houseElement.querySelector('.lodge__checkin-time').textContent = 'Заезд после ' + house.offer.checkin + ', ' + 'выезд до ' + house.offer.checkout;
+  for (i = 0; i < house.offer.features.length; i++) {
+    var offerFeature = houseElement.querySelector('.lodge__features').createElement('span');
+    offerFeature.className = 'feature__image feature__image--' + house.offer.feature[i];
+  }
+  houseElement.querySelector('.lodge__description').textContent = house.offer.description;
+};
 document.replaceChild(renderHouse(houses[0]), dialogPanel);
 dialogImage.src = houses[0].author.avatar;
-
-var randomInteger = function(min, max) {
-    var rand = min + Math.random() * (max + 1 - min);
-    rand = Math.floor(rand);
-    return rand;
-  }
