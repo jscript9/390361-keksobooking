@@ -25,7 +25,7 @@ var TYPES_OF_HOUSES = {
 
 var CHEKIN_TIME = ['12:00', '13:00', '14:00'];
 var CHEKOUT_TIME = ['12:00', '13:00', '14:00'];
-var featuresName = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+var FEATURE_NAMES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
 
 var offerHouses = makeAllOfferObjects(8);
@@ -33,6 +33,39 @@ var pinEl = document.querySelector('.tokyo__pin-map');
 var lodgeTemplate = document.querySelector('#lodge-template').content;
 // var offerDialogEl = document.querySelector('#offer-dialog');
 // var newOfferDialogElement = createOfferDialog(offerHouses[0]);
+var pinActive = document.querySelector('.pin--active');
+var dialogCloseButton = document.querySelector('.dialog__close');
+
+dialogCloseButton.addEventListener('click', function (evt) {
+  dialogClose();
+});
+
+dialogCloseButton.addEventListener('keydown', function (evt) {
+  if (onEnterPress(evt)) {
+    dialogClose();
+  }
+});
+
+function dialogClose() {
+  dialog.classList.add('hidden');
+  removePinActive();
+  document.removeEventListener('keydown', onEscPress);
+}
+
+function dialogOpen() {
+  dialog.classList.remove('hidden');
+  document.addEventListener('keydown', onEscPress);
+}
+
+function onEnterPress(evt) {
+  return evt.keyCode === 13;
+}
+
+function onEscPress(evt) {
+  if (evt.keyCode === 27) {
+    dialogClose();
+  }
+}
 
 function createPin(offer) {
   var pin = document.createElement('div');
@@ -41,6 +74,16 @@ function createPin(offer) {
   pin.classList.add('pin');
   pin.style.left = offer.location.x + 28 + 'px';
   pin.style.top = offer.location.y + 75 + 'px';
+
+  pin.addEventListener('click', function (evt) {
+    addPinActive(pin, offer);
+  });
+
+  pin.addEventListener('keydown', function (evt) {
+    if (onEnterPress(evt)) {
+      addPinActive(pin, offer);
+    }
+  });
 
   return pin;
 }
@@ -64,7 +107,7 @@ function makeOfferObject() {
   result.offer.guests = randomInteger(1, 10);
   result.offer.checkin = CHEKIN_TIME[randomInteger(0, 2)];
   result.offer.checkout = CHEKOUT_TIME[randomInteger(0, 2)];
-  result.offer.features = featuresRandom(featuresName);
+  result.offer.features = featuresRandom();
   result.offer.description = '';
   result.offer.photos = [];
 
@@ -98,16 +141,28 @@ function randomInteger(min, max) {
   return rand;
 }
 
-function compareRandom(a, b) {
-  return Math.random() - 0.5;
-}
+// function compareRandom(a, b) {
+//   return Math.random() - 0.5;
+// }
 
-function featuresRandom(array) {
-  array.sort(compareRandom);
-  array.length = randomInteger(1, 6);
+// function featuresRandom(array) {
+//   array.sort(compareRandom);
+//   array.length = randomInteger(1, 6);
+//   var result = [];
+//   for (var i = 0; i < array.length; i++) {
+//     result.push(array[i]);
+//   }
+//   return result;
+// }
+
+function featuresRandom() {
+  var newFeatureNames = FEATURE_NAMES.slice();
+  // newFeatureNames.sort(compareRandom);
+  newFeatureNames.length = randomInteger(1, 6);
   var result = [];
-  for (var i = 0; i < array.length; i++) {
-    result.push(array[i]);
+  for (var i = 0; i < newFeatureNames.length; i++) {
+    result.push(newFeatureNames[i]);
+
   }
   return result;
 }
@@ -153,41 +208,23 @@ function renderOffers(offerItems) {
 var dialog = document.querySelector('.dialog');
 var dialogPanel = document.querySelector('.dialog__panel');
 
-var newDialog = function (offerItems) {
-  dialog.replaceChild(createOfferDialog(offerItems), dialogPanel);
-  document.querySelector('.dialog__title img').src = offerItems.author.avatar;
+var newDialog = function (offerItem) {
+  dialog.replaceChild(createOfferDialog(offerItem), dialogPanel);
+  document.querySelector('.dialog__title img').src = offerItem.author.avatar;
 };
 
 renderOffers(offerHouses);
-newDialog(offerHouses[5]);
-
 // newDialog(offerHouses[offerHouses.length - 1]);
 
+function removePinActive() {
+  if (pinActive) {
+    pinActive.classList.remove('pin--active');
+  }
+}
 
-// var pinItem = document.querySelector('.pin');
-// var pinActive = document.querySelector('.pin.pin--active');
-// var clickedElement = null;
-
-
-// var clickHandler = function (evt) {
-
-//   if (clickedElement) {
-//     clickedElement.classList.remove('pin--active');
-//   }
-
-//   clickedElement = evt.currentTarget;
-//   clickedElement.classList.add('pin--active');
-// };
-
-// for (var i = 0; i < pinItem.length; i++) {
-//   pinItem[i].addEventListener('click', clickHandler, true);
-//   createOfferDialog(offerHouses[i]);
-// }
-
-// // pinItem.addEventListener('click', function () {
-
-// //   pinItem.classList.add('pin--active');
-
-// // });
-
-// // createPin(offerHouses[i]).addEventListener('click', function);
+function addPinActive(pinItem, offerItem) {
+  removePinActive();
+  pinItem.classList.add('pin--active');
+  dialogOpen();
+  newDialog(offerItem);
+}
