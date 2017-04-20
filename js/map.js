@@ -48,7 +48,7 @@ dialogCloseButton.addEventListener('keydown', function (evt) {
 
 function dialogClose() {
   dialog.classList.add('hidden');
-  // removePinActive();
+  deactivateAllPin();
   document.removeEventListener('keydown', onEscPress);
 }
 
@@ -64,6 +64,7 @@ function onEnterPress(evt) {
 function onEscPress(evt) {
   if (evt.keyCode === 27) {
     dialogClose();
+    deactivateAllPin();
   }
 }
 
@@ -252,16 +253,16 @@ function deactivateAllPin() {
   }
 }
 
-var form = document.querySelector('#notice__form');
+// var form = document.querySelector('#notice__form');
 var arriveTime = document.querySelector('#time');
 var leaveTime = document.querySelector('#timeout');
 var typeOfHome = document.querySelector('#type');
 var price = document.querySelector('#price');
 var numberOfRooms = document.querySelector('#room_number');
 var capacity = document.querySelector('#capacity');
-var invalidHandler = function (evt) {
-  evt.target.classList.add('mistake');
-};
+// var invalidHandler = function (evt) {
+//   evt.target.classList.add('mistake');
+// };
 
 var ROOMS = {
   '1-room': '0-guest',
