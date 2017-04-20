@@ -655,3 +655,16 @@ select option:hover {
 .rounded {
     border-radius: 50%;
 }
+
+.hidden {
+  display: none;
+}
+
+.pin:focus {
+  outline: 5px solid #ff6547;
+  box-shadow: 0 0 4px 1px #ff6547;
+}
+
+.mistake {
+  border-color: 2px solid red;
+}
