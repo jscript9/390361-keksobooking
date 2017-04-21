@@ -665,6 +665,6 @@ select option:hover {
   box-shadow: 0 0 4px 1px #ff6547;
 }
 
-.mistake {
+.error {
   border-color: 2px solid red;
 }

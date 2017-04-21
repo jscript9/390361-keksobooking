@@ -260,9 +260,8 @@ var typeOfHome = document.querySelector('#type');
 var price = document.querySelector('#price');
 var numberOfRooms = document.querySelector('#room_number');
 var capacity = document.querySelector('#capacity');
-// var invalidHandler = function (evt) {
-//   evt.target.classList.add('mistake');
-// };
+var title = document.querySelector('#title');
+var submit = document.querySelector('.form__submit');
 
 var ROOMS = {
   '1-room': '0-guest',
@@ -303,3 +302,26 @@ arriveTime.addEventListener('change', function (evt) {
 leaveTime.addEventListener('change', function (evt) {
   arriveTime.value = TIMES_OUT[leaveTime.value];
 });
+
+function showError(formElement) {
+  formElement.classList.add('error');
+}
+
+function resetError(formElement) {
+  formElement.classList.remove('error');
+}
+
+function validate() {
+
+  resetError(title);
+  if (title.minlength < 30) {
+    showError(title);
+  }
+
+  resetError(typeOfHome);
+  if (!typeOfHome.value) {
+    showError(typeOfHome);
+  }
+}
+
+submit.addEventListener('click', validate);
