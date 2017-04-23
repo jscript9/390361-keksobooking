@@ -666,5 +666,5 @@ select option:hover {
 }
 
 .error {
-  border-color: 2px solid red;
+  border-color: red;
 }
